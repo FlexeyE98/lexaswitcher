@@ -1,0 +1,53 @@
+Metadata-Version: 2.4
+Name: lexa-switcher
+Version: 0.1.0
+Summary: Background keyboard layout switcher
+Requires-Python: >=3.11
+Description-Content-Type: text/markdown
+Requires-Dist: keyboard>=0.13.5; platform_system == "Windows"
+
+﻿# LEXA_SWITCHER_850k
+
+`LEXA_SWITCHER_850k` is being migrated from `AutoHotkey` to a `Python` package with a background agent.
+
+Current state:
+
+- legacy Windows launcher still exists in `LEXA_SWITCHER_850k.ahk`;
+- new Python package is available under `src/lexa_switcher`;
+- `Windows` is the first target backend;
+- `macOS` and `Linux` backends are declared, but not implemented yet.
+
+## Local install through pip
+
+From the project root:
+
+```bash
+pip install .
+```
+
+Run the background agent:
+
+```bash
+lexa-switcher --project-root .
+```
+
+Debug mode:
+
+```bash
+lexa-switcher --project-root . --debug
+```
+
+## Packaging direction
+
+The Python package contains:
+
+- shared conversion and buffer logic;
+- a Windows-first backend for global keyboard hooks;
+- packaged data files from `data/`.
+
+## Legacy launcher
+
+For the current `AutoHotkey` version on Windows:
+
+- run [START_LEXA_SWITCHER_850k.ps1](/C:/working/lexaswitcher/START_LEXA_SWITCHER_850k.ps1)
+- or run [START_LEXA_SWITCHER_850k.cmd](/C:/working/lexaswitcher/START_LEXA_SWITCHER_850k.cmd)

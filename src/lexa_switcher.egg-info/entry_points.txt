@@ -1,0 +1,2 @@
+[console_scripts]
+lexa-switcher = lexa_switcher.main:main

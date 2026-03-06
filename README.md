@@ -1,45 +1,43 @@
 ﻿# LEXA_SWITCHER_850k
 
-`LEXA_SWITCHER_850k` is being migrated from `AutoHotkey` to a `Python` package with a background agent.
+`LEXA_SWITCHER_850k` - переключатель раскладки EN <-> RU.
 
-Current state:
+## Что сделано
+- Исправлен баг с лишними символами перед конвертированным текстом.
+- Добавлен единый запуск из корня с автоопределением ОС.
+- Проект разложен по платформенным папкам.
 
-- legacy Windows launcher still exists in `LEXA_SWITCHER_850k.ahk`;
-- new Python package is available under `src/lexa_switcher`;
-- `Windows` is the first target backend;
-- `macOS` and `Linux` backends are declared, but not implemented yet.
+## Структура
+- `START_LEXA_SWITCHER_850k.py` - единый запуск из корня.
+- `app/lexa_switcher.py` - кроссплатформенная логика.
+- `config/config.ini` - конфиг.
+- `windows/START_LEXA_SWITCHER_850k.ps1` и `windows/START_LEXA_SWITCHER_850k.cmd` - Windows.
+- `windows/LEXA_SWITCHER_850k.ahk` - legacy fallback.
+- `ubuntu-macos/START_LEXA_SWITCHER_850k.sh` - Ubuntu/macOS.
+- `requirements.txt` - зависимости Python.
 
-## Local install through pip
-
-From the project root:
-
+## Универсальный запуск
 ```bash
-pip install .
+python START_LEXA_SWITCHER_850k.py
 ```
 
-Run the background agent:
+Логика:
+- Windows -> запускается `windows/START_LEXA_SWITCHER_850k.ps1`
+- Ubuntu/macOS -> запускается `ubuntu-macos/START_LEXA_SWITCHER_850k.sh`
 
+## Хоткеи
+- `Right Shift` - конвертировать последнюю набранную фразу.
+- `Ctrl+Alt+Pause` - включить/выключить (`Ctrl+Alt+P` fallback в Python-версии).
+
+## Быстрая проверка конвертации
 ```bash
-lexa-switcher --project-root .
+python app/lexa_switcher.py --self-test
+```
+Ожидаемый вывод:
+```text
+привет идиот
 ```
 
-Debug mode:
-
-```bash
-lexa-switcher --project-root . --debug
-```
-
-## Packaging direction
-
-The Python package contains:
-
-- shared conversion and buffer logic;
-- a Windows-first backend for global keyboard hooks;
-- packaged data files from `data/`.
-
-## Legacy launcher
-
-For the current `AutoHotkey` version on Windows:
-
-- run [START_LEXA_SWITCHER_850k.ps1](/C:/working/lexaswitcher/START_LEXA_SWITCHER_850k.ps1)
-- or run [START_LEXA_SWITCHER_850k.cmd](/C:/working/lexaswitcher/START_LEXA_SWITCHER_850k.cmd)
+## Ограничения
+- macOS: нужен доступ Terminal/IDE в `Privacy & Security -> Accessibility`.
+- Linux: глобальные хуки зависят от X11/Wayland и окружения.
