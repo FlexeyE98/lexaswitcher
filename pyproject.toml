@@ -1,0 +1,26 @@
+﻿[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "lexa-switcher"
+version = "0.1.0"
+description = "Background keyboard layout switcher"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "keyboard>=0.13.5; platform_system == 'Windows'",
+]
+
+[project.scripts]
+lexa-switcher = "lexa_switcher.main:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+lexa_switcher = ["data/*.txt"]

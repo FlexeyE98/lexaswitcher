@@ -1,14 +1,45 @@
 ﻿# LEXA_SWITCHER_850k
 
-`LEXA_SWITCHER_850k` - Windows-переключатель раскладки на `AutoHotkey v2`
+`LEXA_SWITCHER_850k` is being migrated from `AutoHotkey` to a `Python` package with a background agent.
 
-Что умеет сейчас:
+Current state:
 
-- правый `Shift` переводит целиком последнее введённое предложение или фразу;
-- `Ctrl+Alt+Pause` включает и выключает скрипт.
+- legacy Windows launcher still exists in `LEXA_SWITCHER_850k.ahk`;
+- new Python package is available under `src/lexa_switcher`;
+- `Windows` is the first target backend;
+- `macOS` and `Linux` backends are declared, but not implemented yet.
 
-## Установка в выбранную папку
+## Local install through pip
 
-- Запусти [INSTALL_LEXA_SWITCHER_850k.ps1].
-- Скрипт спросит путь установки приложения.
-- После копирования он сразу запустит `LEXA_SWITCHER_850k` уже из выбранной директории.
+From the project root:
+
+```bash
+pip install .
+```
+
+Run the background agent:
+
+```bash
+lexa-switcher --project-root .
+```
+
+Debug mode:
+
+```bash
+lexa-switcher --project-root . --debug
+```
+
+## Packaging direction
+
+The Python package contains:
+
+- shared conversion and buffer logic;
+- a Windows-first backend for global keyboard hooks;
+- packaged data files from `data/`.
+
+## Legacy launcher
+
+For the current `AutoHotkey` version on Windows:
+
+- run [START_LEXA_SWITCHER_850k.ps1](/C:/working/lexaswitcher/START_LEXA_SWITCHER_850k.ps1)
+- or run [START_LEXA_SWITCHER_850k.cmd](/C:/working/lexaswitcher/START_LEXA_SWITCHER_850k.cmd)
